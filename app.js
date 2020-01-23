@@ -9,11 +9,22 @@ const db = require('./config/db');
 // Test
 db.authenticate()
     .then(() => console.log('Database connected...'))
-    .catch(err => console.log('Error: ' + err))
+    .catch(err => console.log('Error: ' + err));
 
 const app = express();
 
-app.get('/', (req, res) => res.send('INDEX'));
+// Handlebars
+app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+// Body parser
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Static folders
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Home route
+app.get('/', (req, res) => res.render('index', { layout: 'landing' }));
 
 // Party routes
 app.use('/parties', require('./routes/parties'));
