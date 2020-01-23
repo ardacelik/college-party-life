@@ -5,22 +5,28 @@ const Party = require('../models/Party');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-// Get the list of parties
+// @route   GET /
+// @desc    Show the landing page of the application
+// @access  Public
 router.get('/', (req, res) => 
     Party.findAll()
         .then(parties => res.render('parties', { parties }))
         .catch(err => console.log(err)));
 
-// Add a party form
+// @route   GET /add
+// @desc    Show the "Add Parties" form
+// @access  Public
 router.get('/add', (req, res) => res.render('add'));
 
-// Add a party
+// @route   POST /add
+// @desc    Add a new party by completing the form. The party info will be displayed in "All Parties" page.
+// @access  Public
 router.post('/add', (req, res) => {
     
     let { title, tags, organizer, details, contact_info } = req.body;
     let errors = [];
 
-    // Validate fields
+    // Validate fields and show error boxes if a field is empty
     if(!title) {
         errors.push({ text: 'Please add a title' });
     }
@@ -64,7 +70,9 @@ router.post('/add', (req, res) => {
 
 });
 
-// Search for parties
+// @route   GET /search
+// @desc    Show the search results. Make the searched term lowercase
+// @access  Public
 router.get('/search', (req, res) => {
     let { term } = req.query;
 

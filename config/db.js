@@ -1,3 +1,7 @@
+/**
+ * Database connection using Sequelize
+ */
+
 const Sequelize = require('sequelize');
 module.exports = new Sequelize('localparty', 'postgres', 'arda123', {
     host: 'localhost',

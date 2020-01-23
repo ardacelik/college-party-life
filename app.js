@@ -6,18 +6,17 @@ const path = require('path');
 // Database
 const db = require('./config/db');
 
-// Test
 db.authenticate()
     .then(() => console.log('Database connected...'))
     .catch(err => console.log('Error: ' + err));
 
 const app = express();
 
-// Handlebars
+// Handlebars setup
 app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// Body parser
+// Body parser setup
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static folders

@@ -1,3 +1,8 @@
+/**
+ * Data model for the parties.
+ * It consists of 5 fields: title, tags, organizer, details, contact_info
+ */
+
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
